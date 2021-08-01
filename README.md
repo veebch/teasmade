@@ -2,7 +2,7 @@
 
 # Teasmade
 
-The script the uses picovoice to control a relay that boils water for a steep-release coffee. Shown in this video (LINK)
+The script the uses picovoice to voice-control a relay placed in an old Goblin Teasmade that boils water for a steep-release coffee. Shown in this video (LINK)
 
 # Prerequisites
 
