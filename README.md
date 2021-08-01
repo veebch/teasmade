@@ -6,7 +6,7 @@ The script the uses [picovoice](https://github.com/Picovoice/picovoice) to voice
 
 The motivation for doing this is a simple proof-of-concept for using an offline speech processing engine to control devices. 
 
-**Moral**: It's possible to use voice controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had a voice activated coffee machine, it would be this one, probably (TODO: Snowden Endorsement Ad).
+**Moral**: It's possible to use voice controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had a voice activated coffee machine, it would be this one, probably. ***(TODO: Snowden Endorsement Ad)***
 
 # Prerequisites
 
