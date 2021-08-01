@@ -18,4 +18,5 @@ Install the Python SDK:
 
 ```
 pip3 install pvporcupine
+pip3 install pvrhino
 ```
