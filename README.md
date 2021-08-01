@@ -6,7 +6,7 @@ The script the uses picovoice to voice-control a relay placed in an old Goblin T
 
 The motivation for doing this is a simple proof-of-concept for using an offline speech processing engine to control devices. 
 
-**Moral**: It's possible to use voice controls without signing-up to have a listening device plugged into the cloud. If Edward Snowden had a voice activated coffee machine, it would be this one, probably.
+**Moral**: It's possible to use voice controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had a voice activated coffee machine, it would be this one, probably.
 
 # Prerequisites
 
