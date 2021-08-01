@@ -12,11 +12,18 @@ Uses a two channel Grove Solid State Relay (SSR) and a Grove Repeaker 2 mics HAT
 
 Follow the istallation instructions for the two devices above on a Pi Zero WH
 
-# Instructions
-
-Install the Python SDK:
+# Installation
 
 ```
 pip3 install pvporcupine
 pip3 install pvrhino
+git clone https://github.com/llvllch/teasmade.git
 ```
+
+# Instructions
+
+To run:
+```
+python3 teasmade.py
+```
+To wake for command, say your wakeword (the default is 'bumblebee'. The LEDs will light up is the word is recognised. You can then issue a command from the rhino intent (You can configure yours at [picovoice console](http://picovoice.ai/console)
