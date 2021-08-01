@@ -2,7 +2,7 @@
 
 # Teasmade
 
-The script the uses picovoice to control a relay that boils water for a steep-release coffee
+The script the uses picovoice to control a relay that boils water for a steep-release coffee. Shown in this video (LINK)
 
 # Prerequisites
 
