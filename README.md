@@ -15,9 +15,9 @@ Follow the istallation instructions for the two devices above on a Pi Zero WH
 # Installation
 
 ```
-pip3 install pvporcupine
-pip3 install pvrhino
 git clone https://github.com/llvllch/teasmade.git
+cd teasmade
+pip3 install -r requrements.txt
 ```
 
 # Instructions
