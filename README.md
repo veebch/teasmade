@@ -31,3 +31,5 @@ python3 teasmade.py
 To wake for command, say your wakeword (the default is 'bumblebee'). The LEDs will light up is the word is recognised. You can then issue a command from the rhino intent. You can configure your rhino intents at at [picovoice console](http://picovoice.ai/console), and store them in the `context` directory.
 
 # Coffee
+
+The water Temperature/ Volume target was 90+C/400ml. Results were:
