@@ -2,7 +2,7 @@
 
 # Teasmade
 
-The script the uses [picovoice](https://github.com/Picovoice/picovoice) to voice-control a relay placed in an old Goblin Teasmade that boils water for a steep-release coffee. Shown in this video ***(LINK)***
+The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to voice-control a relay placed in an old Goblin Teasmade that boils water for a steep-release coffee. Shown in this video ***(LINK)***
 
 The motivation for doing this is a simple proof-of-concept for using a calendar to trigger a coffee machine. 
 
