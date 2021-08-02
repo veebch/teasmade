@@ -32,4 +32,4 @@ To wake for command, say your wakeword (the default is 'bumblebee'). The LEDs wi
 
 # Coffee
 
-The water Temperature/ Volume target was 90+C/400ml. Results were:
+The lack of ability to pre-heat the Clever Dripper means that the plastic body absorbs some of the heat from the brew water which reads at 95C immediately after  the Clever Dripper is filled. One minute after pouring, the water temperature us around 85C. 
