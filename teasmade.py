@@ -146,7 +146,7 @@ gpiopinheat = 12
 GPIO.setup(gpiopinheat, GPIO.OUT) # GPIO Assign mode
 
 try:
-    porcupine = pvporcupine.create(keywords=["bumblebee"])
+    porcupine = pvporcupine.create(keywords=["computer"])
 
     pa = pyaudio.PyAudio()
 
