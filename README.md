@@ -10,7 +10,7 @@ The motivation for doing this is a simple proof-of-concept for using a calendar 
 
 # Prerequisites
 
-Uses a two channel Grove Solid State Relay (SSR) and gcalcli
+Uses a two channel Grove Solid State Relay (SSR) and [gcalcli](https://github.com/insanum/gcalcli)
 
 Follow the istallation instructions for the above on a Pi Zero WH
 
