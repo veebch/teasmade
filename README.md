@@ -30,6 +30,6 @@ python3 teasmade.py
 ```
 To wake for command, say your wakeword (the default is 'bumblebee'). The LEDs will light up is the word is recognised. You can then issue a command from the rhino intent. You can configure your rhino intents at at [picovoice console](http://picovoice.ai/console), and store them in the `context` directory.
 
-# Coffee
+# Coffee - Will it Brew?
 
-The lack of ability to pre-heat the Clever Dripper means that the plastic body absorbs some of the heat from the brew water which reads at 95C immediately after  the Clever Dripper is filled. One minute after pouring, the water temperature us around 85C. 
+The lack of ability to pre-heat the Clever Dripper means that the plastic body absorbs some of the heat from the brew water which reads at 95C immediately after  the Clever Dripper is filled. One minute after pouring, the water temperature is around 85C. 
