@@ -21,7 +21,7 @@ git clone https://github.com/llvllch/teasmade.git
 cd teasmade
 pip3 install -r requrements.txt
 ```
-
+Next, use alsameter to adjust the capture volume, leaving it at 100% default makes for a pretty ugly recording, set to mid-range.
 # Instructions
 
 To run:
