@@ -4,22 +4,22 @@
 
 The script the uses [picovoice](https://github.com/Picovoice/picovoice) to voice-control a relay placed in an old Goblin Teasmade that boils water for a steep-release coffee. Shown in this video ***(LINK)***
 
-The motivation for doing this is a simple proof-of-concept for using an offline speech processing engine to control devices. 
+The motivation for doing this is a simple proof-of-concept for using a calendar to trigger a coffee machine. 
 
-**Moral**: It's possible to use voice controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had a voice activated coffee machine, it would be this one, probably. ***(TODO: Snowden Endorsement Ad)***
+**Moral**: It's possible to use home-automation controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had an automated coffee machine, it would be this one, probably. ***(TODO: Snowden Endorsement Ad)***
 
 # Prerequisites
 
-Uses a two channel Grove Solid State Relay (SSR) and a Grove Repeaker 2 mics HAT
+Uses a two channel Grove Solid State Relay (SSR) and gcalcli
 
-Follow the istallation instructions for the two devices above on a Pi Zero WH
+Follow the istallation instructions for the above on a Pi Zero WH
 
 # Installation
 
 ```
 git clone https://github.com/llvllch/teasmade.git
 cd teasmade
-pip3 install -r requrements.txt
+pip3 install -r requirements.txt
 ```
 Next, use alsameter to adjust the capture volume, leaving it at 100% default makes for a pretty ugly recording, set to mid-range.
 # Instructions
@@ -28,7 +28,7 @@ To run:
 ```
 python3 teasmade.py
 ```
-To wake for command, say your wakeword (the default is 'bumblebee'). The LEDs will light up is the word is recognised. You can then issue a command from the rhino intent. You can configure your rhino intents at at [picovoice console](http://picovoice.ai/console), and store them in the `context` directory.
+The script monitors the calendar and when it sees a reminder that it's coffee time, it switches the relay to turn the Goblin Teasmade on.
 
 # Coffee - Will it Brew?
 
