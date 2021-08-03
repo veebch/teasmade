@@ -1,0 +1,3 @@
+calendar:
+        name: <insert calendar name>
+        trigger: coffee:
