@@ -147,9 +147,12 @@ def main():
 	GPIO.setup(gpiopinlight, GPIO.OUT) # GPIO Assign mode
 	gpiopinheat = 12
 	GPIO.setup(gpiopinheat, GPIO.OUT) # GPIO Assign mode
+	#Initialise to off
 	poweron=False
-	configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
+	pixels.off()
+	GPIO.output(gpiopinheat, GPIO.LOW)
 
+	configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
 	args = parser.parse_args()
@@ -165,10 +168,8 @@ def main():
 		while poweron==False:
     		#Check calendar for coffee in the next 10 minutes
 			now = datetime.now()
-			print(now)
-			now_plus_10 = now + timedelta(minutes = 10)
-			print(now_plus_10)
-			result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now), str(now_plus_10)], stdout=subprocess.PIPE)
+			now_plus = now + timedelta(minutes = 8)
+			result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now), str(now_plus)], stdout=subprocess.PIPE)
 			print(result.stdout.decode())
 			notyet ="No Event" in result.stdout.decode()
 			if notyet==False:
@@ -181,8 +182,8 @@ def main():
 			time.sleep(60)
     	# Should I turn off yet?
 		print("Power to teasmade active for 20 mins")
-		for i in tqdm(range(100)):
-			time.sleep(12)
+		for i in tqdm(range(120)):
+			time.sleep(6)
 		GPIO.output(gpiopinheat, GPIO.LOW)
 		poweron=False
 		pixels.off()
