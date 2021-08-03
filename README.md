@@ -34,6 +34,6 @@ The script monitors the calendar and when it sees a reminder that it's coffee ti
 
 The lack of ability to pre-heat the Clever Dripper means that the plastic body absorbs some of the heat from the brew water which reads at 95C immediately after  the Clever Dripper is filled. One minute after pouring, the water temperature is around 85C.
 
-Water volume is determined by the rocker switch cut-off, ~430ml
+Water volume is determined by the teasmade's rocker-switch cut-off, ~430ml
 
 Freshly ground Coffee, 26g (ie 60g of coffee per kg of water)
