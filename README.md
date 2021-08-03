@@ -10,7 +10,7 @@ The motivation for building this, is a simple proof-of-concept for using a ring-
 
 # Prerequisites
 
-Uses a two channel Grove Solid State Relay (SSR) and [gcalcli](https://github.com/insanum/gcalcli)
+Uses a [two channel Grove Solid State Relay](https://wiki.seeedstudio.com/Grove-2-Channel_Solid_State_Relay/) (SSR) and [gcalcli](https://github.com/insanum/gcalcli)
 
 Follow the istallation instructions for the above on a Pi Zero WH
 
