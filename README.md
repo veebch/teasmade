@@ -37,3 +37,7 @@ The lack of ability to pre-heat the Clever Dripper means that the plastic body a
 Water volume is determined by the teasmade's rocker-switch cut-off, ~430ml
 
 Freshly ground Coffee, 26g (ie 60g of coffee per kg of water)
+
+# Bonus - Voice control
+
+
