@@ -42,4 +42,6 @@ Freshly ground Coffee, 26g (ie 60g of coffee per kg of water)
 
 # Bonus - Voice control
 
+If you'd like to take all of this off-grid and have a less formal relationship with your Teasmade, then it's relatively simple to control it with an offline voice recognition tool. The file `teasmadevoice.py` contains the code to control the teasmade isng picovoice - an Edge Voice AI Platform. There are fully open-source alternatives to this (eg Mycroft). 
+
 
