@@ -40,6 +40,27 @@ Put a 5 minute appointement in your google calendar with the title "brew time" (
 
 The script monitors the calendar and when it sees a reminder that it's brew time, it switches the relay to turn the Goblin Teasmade on. It the code scans your chosen gmail calendar once a minute and checks "Is there a matching slot in the next 8 minutes (this is how long the teasmade takes to boil). If it sees a calendar slot with the trigger word(s) (in `config.yaml`) in the title, the relay switch closes (which just mimics the teasmade alarm being activated) and the tea begins to brew. Once the 8 minutes has passed, the alarm plays (we use the British National anthem).
 
+# Add Autostart
+
+```
+cat <<EOF | sudo tee /etc/systemd/system/teasmade.service
+[Unit]
+Description=teasmade
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u /home/pi/bteasmade/teasmade.py
+WorkingDirectory=/home/pi/teasmade/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
 # Bonus - Voice control
 
 If you'd like to take all of this off-grid and have a less formal relationship with your Teasmade, then it's relatively simple to control it with an offline voice recognition tool. The file `teasmadevoice.py` contains the code to control the teasmade using Picovoice - an Edge Voice AI Platform. There are fully open-source alternatives to picovoice (eg [Mycroft](https://github.com/MycroftAI)).
