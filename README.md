@@ -10,9 +10,12 @@ The motivation for building this, is a simple proof-of-concept for using a ring-
 
 # Prerequisites
 
-Uses a [Grove 2 channel Solid State Relay](https://wiki.seeedstudio.com/Grove-2-Channel_Solid_State_Relay/) (SSR) and [gcalcli](https://github.com/insanum/gcalcli)
+A Raspberry Pi with a relay switch and an internet connection.
 
-Follow the istallation instructions for the above on a Pi Zero WH
+- Relay Switch: Uses a [Grove 2 channel Solid State Relay](https://wiki.seeedstudio.com/Grove-2-Channel_Solid_State_Relay/) (SSR)
+- Google Calendar connection: [gcalcli](https://github.com/insanum/gcalcli)
+
+Follow the installation instructions for the above on your Pi.
 
 # Installation
 
