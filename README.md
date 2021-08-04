@@ -2,11 +2,11 @@
 
 # Teasmade
 
-The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in an old Goblin Teasmade that boils water for a steep-release ([Clever Dripper](https://library.sweetmarias.com/clever-coffee-dripper-a-full-immersion-brewing-method/)) coffee. Shown in this video ***(LINK)***
+The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in an old Goblin Teasmade that boils water. Shown in this video ***(LINK)***
 
-The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device-automation.
+The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device (not teasmade) - automation.
 
-**Moral**: It's possible to use home-automation controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had an automated coffee machine, it would be this one, probably. ***(TO DO: Snowden Endorsement Ad)***
+**Moral**: It's possible to use home-automation controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had an automated tea/coffee machine, it would be this one, probably. ***(TO DO: Snowden Endorsement Ad)***
 
 # Prerequisites
 
@@ -21,6 +21,11 @@ git clone https://github.com/llvllch/teasmade.git
 cd teasmade
 pip3 install -r requirements.txt
 ```
+To install the [mplayer](https://github.com/baudm/mplayer.py) module for the alarm:
+
+```
+pip install git+https://github.com/baudm/mplayer.py.git@0.7.2 
+```
 
 # Instructions
 
@@ -28,12 +33,12 @@ To run:
 ```
 python3 teasmade.py
 ```
-The script monitors the calendar and when it sees a reminder that it's coffee time, it switches the relay to turn the Goblin Teasmade on.
+Put a 5 minute appointement in your google calendar with the title "brew time" (or whatever you chosen trigger word is). 
 
-# Coffee - Will it Brew?
+The script monitors the calendar and when it sees a reminder that it's brew time, it switches the relay to turn the Goblin Teasmade on. It the code scans your chosen gmail calendar once a minute and checks "Is there a matching slot in the next 8 minutes (this is how long the teasmade takes to boil). If it sees a calendar slot with the trigger word(s) (in `config.yaml`) in the title, the relay switch closes (which just mimics the teasmade alarm being activated) and the tea begins to brew. Once the 8 minutes has passed, the alarm plays (we use the British National anthem).
 
-The lack of ability to pre-heat the Clever Dripper means that the plastic body absorbs some of the heat from the brew water which reads at 95C immediately after  the Clever Dripper is filled. One minute after pouring, the water temperature is around 85C.
+# Bonus - Voice control
 
-Water volume is determined by the teasmade's rocker-switch cut-off, ~430ml
+If you'd like to take all of this off-grid and have a less formal relationship with your Teasmade, then it's relatively simple to control it with an offline voice recognition tool. The file `teasmadevoice.py` contains the code to control the teasmade using Picovoice - an Edge Voice AI Platform. There are fully open-source alternatives to picovoice (eg [Mycroft](https://github.com/MycroftAI)). 
 
-Freshly ground Coffee, 26g (ie 60g of coffee per kg of water)
+
