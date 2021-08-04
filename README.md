@@ -2,7 +2,7 @@
 
 # Teasmade
 
-The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in an old Goblin Teasmade that boils water for a steep-release ([Clever Dripper](https://library.sweetmarias.com/clever-coffee-dripper-a-full-immersion-brewing-method/)) coffee. Shown in this video ***(LINK)***
+The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in an old Goblin Teasmade that boils water. Shown in this video ***(LINK)***
 
 The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device (not teasmade) - automation.
 
