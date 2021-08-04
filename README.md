@@ -72,7 +72,7 @@ sudo reboot
 
 # Bonus - Voice control
 
-If you'd like to take all of this off-grid and have a less formal relationship with your Teasmade, then it's relatively simple to control it with an offline voice recognition tool. The file `teasmadevoice.py` contains the code to control the teasmade using Picovoice - an Edge Voice AI Platform. There are fully open-source alternatives to picovoice (eg [Mycroft](https://github.com/MycroftAI)).
+If you'd like to take this entire transaction off-grid and have a less formal relationship with your Teasmade, then it's relatively simple to control it with an offline voice recognition tool. The file `teasmadevoice.py` contains the code to control the teasmade using Picovoice - an Edge Voice AI Platform. There are fully open-source alternatives to picovoice (eg [Mycroft](https://github.com/MycroftAI)).
 
 Installation instructions for the installation of the required tools can be found on the [Grove Website](https://wiki.seeedstudio.com/ReSpeaker_2_Mics_Pi_HAT_Raspberry/).
 
