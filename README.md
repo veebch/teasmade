@@ -49,7 +49,7 @@ Description=teasmade
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 -u /home/pi/bteasmade/teasmade.py
+ExecStart=/usr/bin/python3 -u /home/pi/teasmade/teasmade.py
 WorkingDirectory=/home/pi/teasmade/
 StandardOutput=inherit
 StandardError=inherit
