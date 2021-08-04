@@ -1,3 +1,7 @@
 calendar:
-        name: <insert calendar name>
-        trigger: coffee:
+        name: <CALENDARNAME>
+        trigger: brew time
+relay:
+        closedfor: 10
+alarm:
+        pathtotrack: /home/pi/Music/NationalAnthem.mp3
