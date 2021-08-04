@@ -17,6 +17,7 @@ import yaml
 import argparse
 import logging
 import threading
+import argparse
 from datetime import datetime, timedelta
 try:
 	import queue as Queue
@@ -149,6 +150,13 @@ class Pixels:
 pixels = Pixels()
 
 def main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
+	args = parser.parse_args()
+	interruptflag=False
+	alarmplaying=False
+	loglevel = getattr(logging, args.log.upper(), logging.WARN)
+	logging.basicConfig(level=loglevel)
 	try:
 
 		lights=Pixels()
@@ -182,7 +190,7 @@ def main():
 				now = datetime.now()
 				now_plus = now + timedelta(minutes = 8)
 				result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now), str(now_plus)], stdout=subprocess.PIPE)
-				print(result.stdout.decode())
+				logging.info(result.stdout.decode())
 				notyet ="No Event" in result.stdout.decode()
 				if notyet==False:
 					logging.info("Matching appointment coming up, heating the water")
@@ -204,23 +212,31 @@ def main():
 					GPIO.output(gpiopinheat, GPIO.LOW)
 					pixels.off()
 					poweron=False
-					brewalarm.quit()
+					if alarmplaying:
+						brewalarm.quit()
 					logging.info("Heating interrupted by button press")
+					interruptflag=True
 					break
 				time.sleep(heattimeseconds/iterations)
 			# Fanfare
-			brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
-			brewalarm.play()
-
+			if interruptflag==True:
+				logging.info("Waiting for 60 seconds before checking again")
+				time.sleep(60)	
+			else:
+				logging.info("Alarm Music starting")
+				brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
+				brewalarm.play()
+				alarmplaying=True
 			GPIO.output(gpiopinheat, GPIO.LOW)
 			poweron=False
+			alarmplaying=False
 			pixels.off()
-			time.sleep(60)
+			time.sleep(1)
 	except KeyboardInterrupt:  
 		pixels.off()
 		time.sleep(1)  
 		logging.info("Interrupt: ctrl + c:")
-		GPIO.cleanup()S
+		GPIO.cleanup()
 
 
 if __name__ == '__main__':
