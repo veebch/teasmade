@@ -1,12 +1,13 @@
-![Action Shot](/images/Goblin854.png)
-
-[![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCz5BOU9J9pB_O0B8-rDjCWQ?label=YouTube&style=social)](https://www.youtube.com/channel/UCz5BOU9J9pB_O0B8-rDjCWQ)
 
 # Teasmade (making Coffee)
 
 The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in a **1974** Goblin 854 [Teasmade](https://www.youtube.com/watch?v=WTlVVQV0Uug) to boil  water for tea/coffee. Shown in this video ***(LINK)***
 
 The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device (not teasmade) - automation.
+
+![Action Shot](/images/Goblin854.png)
+
+[![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCz5BOU9J9pB_O0B8-rDjCWQ?label=YouTube&style=social)](https://www.youtube.com/channel/UCz5BOU9J9pB_O0B8-rDjCWQ)
 
 **Moral**: It's possible to use home-automation controls without signing-up to have a listening device constantly plugged into the cloud. If Edward Snowden had an automated tea/coffee machine, it would be this one, probably. ***(TO DO: Snowden Endorsement Ad)***
 
