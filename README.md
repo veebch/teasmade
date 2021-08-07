@@ -1,5 +1,5 @@
 
-# Teasmade (making Coffee)
+# Raspberry Pi Teasmade AI (making Coffee)
 
 The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in a **1974** Goblin 854 [Teasmade](https://www.youtube.com/watch?v=WTlVVQV0Uug) to boil  water for tea/coffee. Shown in this video ***(LINK)***
 
