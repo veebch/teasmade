@@ -2,7 +2,6 @@
 
 
 from tqdm import tqdm
-
 import vlc
 import struct
 import re
@@ -93,8 +92,8 @@ def main():
 				time.sleep(heattimeseconds/iterations)
 			# Fanfare
 			if interruptflag==True:
-				logging.info("Waiting for 60 seconds before checking again")
-				time.sleep(60)	
+				logging.info("Waiting for 10 minutes before checking again")
+				time.sleep(600)	
 			else:
 				logging.info("Alarm Music starting")
 				brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
