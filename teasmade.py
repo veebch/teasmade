@@ -70,8 +70,10 @@ def main():
 			while poweron==False:
 				# Check calendar for coffee in the next 10 minutes
 				now = datetime.now()
-				now_plus = now + timedelta(minutes = 10)
-				result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now), str(now_plus)], stdout=subprocess.PIPE)
+				lookahead = config['calendar']['lookahead']
+				now_plus_start = now + timedelta(minutes = lookahead)
+				now_plus_end= now + timedelta(minutes = lookahead+1)
+				result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now_plus_start), str(now_plus_end)], stdout=subprocess.PIPE)
 				logging.info(result.stdout.decode())
 				waitforit ="No Event" in result.stdout.decode()
 				if waitforit==False:
