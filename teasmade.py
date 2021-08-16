@@ -75,7 +75,7 @@ def main():
 
 	# Set up the button
 	button = gpiozero.Button(17)
-	button.when_pressed = togglerelay
+	button.when_pressed = togglerelay # Note missing brackets, it's a label
 
 	configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
 	parser = argparse.ArgumentParser()
