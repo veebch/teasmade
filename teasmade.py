@@ -29,10 +29,9 @@ gpiopinheat = 12
 heatrelay = gpiozero.OutputDevice(gpiopinheat, active_high=True, initial_value=False)
 
 def resetkettle():
-	poweron=False
 	pixels.off()
 	heatrelay.off()
-	return poweron
+	return
 
 def boil():
 	# Turn the relay on
@@ -41,14 +40,43 @@ def boil():
 	pixels.wakeup()
 	time.sleep(3)
 	pixels.think()
-	# Note the time it was turned on at
-	turnedonat=datetime.now()
-	poweron=True
-	# The Kettle is on now, so we can move on
-	return poweron
+	# Pause for the time in the config file
+	iterations=100
+	heattimeseconds=int(config['relay']['closedfor'])*60
+	notify = "Power to teasmade active for "+str(config['relay']['closedfor'])+" minutes"
+	logging.info(notify)
+
+	for i in tqdm(range(iterations)):
+		time.sleep(heattimeseconds/iterations)
+
+	return
+
+def alarm():
+	logging.info("Alarm Music starting")
+	brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
+	brewalarm.play()
+	return
+
+def togglerelay():
+	if heatrelay.value==1:
+		print("On... Turning off")
+		pixels.off()
+		heatrelay.off()
+	elif heatrelay.value==0:
+		print("Off...Turning on")
+		heatrelay.on()
+		# Visual Indicator of Heating
+		pixels.wakeup()
+		time.sleep(3)
+		pixels.think()
+	return
 
 def main():
+
+	# Set up the button
 	button = gpiozero.Button(17)
+	button.when_pressed = togglerelay
+
 	configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
@@ -65,39 +93,24 @@ def main():
 		poweron=resetkettle()
 		
 		while True:
-			# If the kettle isn't on, check if it should be
-			while poweron==False:
-				# Check calendar for coffee in the next 10 minutes
-				now = datetime.now()
-				lookahead = config['calendar']['lookahead']
-				now_plus_start = now + timedelta(minutes = lookahead)
-				now_plus_end= now + timedelta(minutes = lookahead+1)
-				result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now_plus_start), str(now_plus_end)], stdout=subprocess.PIPE)
-				logging.info(result.stdout.decode())
-				waitforit ="No Event" in result.stdout.decode()
-				if waitforit==False:
-					logging.info("Matching appointment coming up, heating the water")
-					poweron=boil()
-				else:
-					time.sleep(60)
-
-			# The Kettle must have turned on, so we wait, then play an alarm?
-			iterations=100
-			heattimeseconds=int(config['relay']['closedfor'])*60
-
-			notify = "Power to teasmade active for "+str(config['relay']['closedfor'])+" minutes"
-			logging.info(notify)
-
-			for i in tqdm(range(iterations)):
-				time.sleep(heattimeseconds/iterations)
-
-			# Been boiling for a while, time for a glorious fanfare
-			logging.info("Alarm Music starting")
-			brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
-			brewalarm.play()
-
-			# Turn the kettle off. Teasmade should have already done this. Safety first etc
-			poweron=resetkettle()
+			# Check calendar for coffee in the next 10 minutes
+			now = datetime.now()
+			lookahead = config['calendar']['lookahead']
+			now_plus_start = now + timedelta(minutes = lookahead)
+			now_plus_end= now + timedelta(minutes = lookahead+1)
+			result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now_plus_start), str(now_plus_end)], stdout=subprocess.PIPE)
+			logging.info(result.stdout.decode())
+			waitforit ="No Event" in result.stdout.decode()
+			if waitforit==False:
+				logging.info("Matching appointment coming up, heating the water")
+				boil()
+				# if boil completed without interrupt, play the alarm
+				if heatrelay.value==1:
+					alarm()
+					# Turn the kettle off. Teasmade should have already done this. Safety first etc
+					resetkettle()
+			else:
+				time.sleep(60)
 			# Back to beginning of loop to check the calendar
 
 	except KeyboardInterrupt:  
