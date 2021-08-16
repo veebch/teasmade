@@ -1,10 +1,5 @@
-ifdef::env-github[]
-image:https://img.youtube.com/vi/BIGsW0TYSuU/maxresdefault.jpg[link=https://youtu.be/BIGsW0TYSuU]
-endif::[]
 
-ifndef::env-github[]
-video::BIGsW0TYSuU[youtube]
-endif::[]
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/BIGsW0TYSuU/0.jpg)](https://www.youtube.com/watch?v=BIGsW0TYSuU)
 
 # Raspberry Pi Teasmade AI (making Coffee)
 
