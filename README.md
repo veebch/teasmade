@@ -1,10 +1,3 @@
-
-# Raspberry Pi Teasmade AI (making Coffee)
-
-The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in a **1974** Goblin 854 [Teasmade](https://www.youtube.com/watch?v=WTlVVQV0Uug) to boil  water for tea/coffee. Shown in [this video](https://youtu.be/BIGsW0TYSuU)
-
-The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device (not teasmade) - automation.
-
 ifdef::env-github[]
 image:https://img.youtube.com/vi/BIGsW0TYSuU/maxresdefault.jpg[link=https://youtu.be/BIGsW0TYSuU]
 endif::[]
@@ -12,6 +5,12 @@ endif::[]
 ifndef::env-github[]
 video::BIGsW0TYSuU[youtube]
 endif::[]
+
+# Raspberry Pi Teasmade AI (making Coffee)
+
+The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/gcalcli)) to control a relay placed in a **1974** Goblin 854 [Teasmade](https://www.youtube.com/watch?v=WTlVVQV0Uug) to boil  water for tea/coffee. Shown in [this video](https://youtu.be/BIGsW0TYSuU)
+
+The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device (not teasmade) - automation.
 
 [![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCz5BOU9J9pB_O0B8-rDjCWQ?label=YouTube&style=social)](https://www.youtube.com/channel/UCz5BOU9J9pB_O0B8-rDjCWQ)
 
