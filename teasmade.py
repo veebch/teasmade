@@ -50,21 +50,20 @@ def boil():
 	return poweron
 
 def main():
-	
+	configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
+	parser = argparse.ArgumentParser()
+	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
+	args = parser.parse_args()
+	loglevel = getattr(logging, args.log.upper(), logging.WARN)
+	logging.basicConfig(level=loglevel)
+
+	with open(configfile) as f:
+		config = yaml.load(f, Loader=yaml.FullLoader)
+	logging.info(config)
+
 	try:
 		#Initialise to off
 		poweron=resetkettle()
-
-		configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
-		parser = argparse.ArgumentParser()
-		parser.add_argument("--log", default='info', help='Set the log level (default: info)')
-		args = parser.parse_args()
-		loglevel = getattr(logging, args.log.upper(), logging.WARN)
-		logging.basicConfig(level=loglevel)
-
-		with open(configfile) as f:
-			config = yaml.load(f, Loader=yaml.FullLoader)
-		logging.info(config)
 		
 		while True:
 			# If the kettle isn't on, check if it should be
@@ -98,7 +97,8 @@ def main():
 
 			# Turn the kettle off. Teasmade should have already done this. Safety first etc
 			poweron=resetkettle()
-			
+			# Back to beginning of loop to check the calendar
+
 	except KeyboardInterrupt:  
 		resetkettle()
 		time.sleep(1)  
