@@ -7,7 +7,7 @@ import os
 import subprocess
 import sys
 import pyaudio
-import RPi.GPIO as GPIO
+import gpiozero
 import apa102
 from pixels import Pixels
 import time
@@ -17,7 +17,6 @@ import logging
 import threading
 import argparse
 from datetime import datetime, timedelta
-GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
 # Initialise things, lights loglevel, flags etc
 pixels = Pixels()
 parser = argparse.ArgumentParser()
@@ -25,20 +24,19 @@ parser.add_argument("--log", default='info', help='Set the log level (default: i
 args = parser.parse_args()
 loglevel = getattr(logging, args.log.upper(), logging.WARN)
 logging.basicConfig(level=loglevel)	
-gpiopinlight = 13
-GPIO.setup(gpiopinlight, GPIO.OUT) # GPIO Assign mode
+gpiosparerelay = 13 # Only one relay is currently used, this is the spare
 gpiopinheat = 12
-GPIO.setup(gpiopinheat, GPIO.OUT) # GPIO Assign mode
+heatrelay = gpiozero.OutputDevice(gpiopinheat, active_high=True, initial_value=False)
 
 def resetkettle():
 	poweron=False
 	pixels.off()
-	GPIO.output(gpiopinheat, GPIO.LOW)
+	heatrelay.off()
 	return poweron
 
 def boil():
 	# Turn the relay on
-	GPIO.output(gpiopinheat, GPIO.HIGH)
+	heatrelay.on()
 	# Visual Indicator of Heating
 	pixels.wakeup()
 	time.sleep(3)
@@ -50,6 +48,7 @@ def boil():
 	return poweron
 
 def main():
+	button = gpiozero.Button(17)
 	configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
@@ -105,7 +104,7 @@ def main():
 		resetkettle()
 		time.sleep(1)  
 		logging.info("Interrupt: ctrl + c:")
-		GPIO.cleanup()
+		heatrelay.close()
 
 
 if __name__ == '__main__':
