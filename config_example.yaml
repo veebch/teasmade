@@ -1,7 +1,8 @@
 calendar:
         name: <CALENDARNAME>
         trigger: brew time
+        lookahead: 10
 relay:
-        closedfor: 10
+        closedfor: 15
 alarm:
         pathtotrack: /home/pi/Music/NationalAnthem.mp3
