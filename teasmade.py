@@ -17,36 +17,48 @@ import logging
 import threading
 import argparse
 from datetime import datetime, timedelta
+GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
+# Initialise things, lights loglevel, flags etc
+pixels = Pixels()
+parser = argparse.ArgumentParser()
+parser.add_argument("--log", default='info', help='Set the log level (default: info)')
+args = parser.parse_args()
+loglevel = getattr(logging, args.log.upper(), logging.WARN)
+logging.basicConfig(level=loglevel)	
+gpiopinlight = 13
+GPIO.setup(gpiopinlight, GPIO.OUT) # GPIO Assign mode
+gpiopinheat = 12
+GPIO.setup(gpiopinheat, GPIO.OUT) # GPIO Assign mode
+
+def resetkettle():
+	poweron=False
+	pixels.off()
+	GPIO.output(gpiopinheat, GPIO.LOW)
+	return poweron
+
+def boil():
+	# Turn the relay on
+	GPIO.output(gpiopinheat, GPIO.HIGH)
+	# Visual Indicator of Heating
+	pixels.wakeup()
+	time.sleep(3)
+	pixels.think()
+	# Note the time it was turned on at
+	turnedonat=datetime.now()
+	poweron=True
+	# The Kettle is on now, so we can move on
+	return poweron
 
 def main():
-	# Initialise things, lights loglevel, flags etc
-	pixels = Pixels()
-	parser = argparse.ArgumentParser()
-	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
-	args = parser.parse_args()
-	interruptflag=False
-	alarmplaying=False
-	loglevel = getattr(logging, args.log.upper(), logging.WARN)
-	logging.basicConfig(level=loglevel)
+	
 	try:
-		GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
-		# Button will be used to toggle power - A 'boil now'
-		BUTTON = 17
-		GPIO.setup(BUTTON, GPIO.IN) 
-		gpiopinlight = 13
-		GPIO.setup(gpiopinlight, GPIO.OUT) # GPIO Assign mode
-		gpiopinheat = 12
-		GPIO.setup(gpiopinheat, GPIO.OUT) # GPIO Assign mode
 		#Initialise to off
-		poweron=False
-		pixels.off()
-		GPIO.output(gpiopinheat, GPIO.LOW)
+		poweron=resetkettle()
 
 		configfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),'config.yaml')
 		parser = argparse.ArgumentParser()
 		parser.add_argument("--log", default='info', help='Set the log level (default: info)')
 		args = parser.parse_args()
-
 		loglevel = getattr(logging, args.log.upper(), logging.WARN)
 		logging.basicConfig(level=loglevel)
 
@@ -55,57 +67,40 @@ def main():
 		logging.info(config)
 		
 		while True:
+			# If the kettle isn't on, check if it should be
 			while poweron==False:
-				#Check calendar for coffee in the next 10 minutes
+				# Check calendar for coffee in the next 10 minutes
 				now = datetime.now()
 				now_plus = now + timedelta(minutes = 10)
 				result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now), str(now_plus)], stdout=subprocess.PIPE)
 				logging.info(result.stdout.decode())
-				notyet ="No Event" in result.stdout.decode()
-				if notyet==False:
+				waitforit ="No Event" in result.stdout.decode()
+				if waitforit==False:
 					logging.info("Matching appointment coming up, heating the water")
-					GPIO.output(gpiopinheat, GPIO.HIGH)
-					pixels.wakeup()
-					time.sleep(3)
-					pixels.think()
-					turnedonat=datetime.now()
-					poweron=True
-					break
-				time.sleep(60)
-			# Should I turn off yet?
+					poweron=boil()
+				else:
+					time.sleep(60)
+
+			# The Kettle must have turned on, so we wait, then play an alarm?
 			iterations=100
 			heattimeseconds=int(config['relay']['closedfor'])*60
+
 			notify = "Power to teasmade active for "+str(config['relay']['closedfor'])+" minutes"
 			logging.info(notify)
+
 			for i in tqdm(range(iterations)):
-				state = GPIO.input(BUTTON)
-				if not state:
-					if poweron == True:
-						GPIO.output(gpiopinheat, GPIO.LOW)
-						pixels.off()
-						poweron=False
-						if alarmplaying:
-							brewalarm.quit()
-						logging.info("Heating interrupted by button press")
-						interruptflag=True
-						break
 				time.sleep(heattimeseconds/iterations)
-			# Been boiling for a while, time for a Fanfare
-			if interruptflag==True:
-				logging.info("Waiting for 10 minutes before checking again")
-				time.sleep(600)	
-			else:
-				logging.info("Alarm Music starting")
-				brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
-				brewalarm.play()
-				alarmplaying=True
-			GPIO.output(gpiopinheat, GPIO.LOW)
-			poweron=False
-			alarmplaying=False
-			pixels.off()
-			time.sleep(1)
+
+			# Been boiling for a while, time for a glorious fanfare
+			logging.info("Alarm Music starting")
+			brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
+			brewalarm.play()
+
+			# Turn the kettle off. Teasmade should have already done this. Safety first etc
+			poweron=resetkettle()
+			
 	except KeyboardInterrupt:  
-		pixels.off()
+		resetkettle()
 		time.sleep(1)  
 		logging.info("Interrupt: ctrl + c:")
 		GPIO.cleanup()
