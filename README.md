@@ -5,7 +5,13 @@ The script the uses a Google Calendar (via [gcalcli](https://github.com/insanum/
 
 The motivation for building this, is a simple proof-of-concept for using a ring-fenced online resource to trigger device (not teasmade) - automation.
 
-![Action Shot](/images/Goblin854.png)
+ifdef::env-github[]
+image:https://img.youtube.com/vi/BIGsW0TYSuU/maxresdefault.jpg[link=https://youtu.be/BIGsW0TYSuU]
+endif::[]
+
+ifndef::env-github[]
+video::BIGsW0TYSuU[youtube]
+endif::[]
 
 [![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCz5BOU9J9pB_O0B8-rDjCWQ?label=YouTube&style=social)](https://www.youtube.com/channel/UCz5BOU9J9pB_O0B8-rDjCWQ)
 
