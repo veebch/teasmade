@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 from tqdm import tqdm
 import vlc
 import struct
@@ -21,6 +19,7 @@ import argparse
 from datetime import datetime, timedelta
 
 def main():
+	# Initialise things, lights loglevel, flags etc
 	pixels = Pixels()
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--log", default='info', help='Set the log level (default: info)')
@@ -30,9 +29,8 @@ def main():
 	loglevel = getattr(logging, args.log.upper(), logging.WARN)
 	logging.basicConfig(level=loglevel)
 	try:
-
-		lights=Pixels()
 		GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
+		# Button will be used to toggle power - A 'boil now'
 		BUTTON = 17
 		GPIO.setup(BUTTON, GPIO.IN) 
 		gpiopinlight = 13
@@ -60,7 +58,7 @@ def main():
 			while poweron==False:
 				#Check calendar for coffee in the next 10 minutes
 				now = datetime.now()
-				now_plus = now + timedelta(minutes = 8)
+				now_plus = now + timedelta(minutes = 10)
 				result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now), str(now_plus)], stdout=subprocess.PIPE)
 				logging.info(result.stdout.decode())
 				notyet ="No Event" in result.stdout.decode()
@@ -69,7 +67,7 @@ def main():
 					GPIO.output(gpiopinheat, GPIO.HIGH)
 					pixels.wakeup()
 					time.sleep(3)
-					pixels.think ()
+					pixels.think()
 					turnedonat=datetime.now()
 					poweron=True
 					break
@@ -77,20 +75,22 @@ def main():
 			# Should I turn off yet?
 			iterations=100
 			heattimeseconds=int(config['relay']['closedfor'])*60
-			print("Power to teasmade active for "+str(config['relay']['closedfor'])+" minutes")
+			notify = "Power to teasmade active for "+str(config['relay']['closedfor'])+" minutes"
+			logging.info(notify)
 			for i in tqdm(range(iterations)):
 				state = GPIO.input(BUTTON)
 				if not state:
-					GPIO.output(gpiopinheat, GPIO.LOW)
-					pixels.off()
-					poweron=False
-					if alarmplaying:
-						brewalarm.quit()
-					logging.info("Heating interrupted by button press")
-					interruptflag=True
-					break
+					if poweron == True:
+						GPIO.output(gpiopinheat, GPIO.LOW)
+						pixels.off()
+						poweron=False
+						if alarmplaying:
+							brewalarm.quit()
+						logging.info("Heating interrupted by button press")
+						interruptflag=True
+						break
 				time.sleep(heattimeseconds/iterations)
-			# Fanfare
+			# Been boiling for a while, time for a Fanfare
 			if interruptflag==True:
 				logging.info("Waiting for 10 minutes before checking again")
 				time.sleep(600)	
