@@ -36,7 +36,7 @@ python3 teasmade.py
 ```
 Put a 5 minute appointement in your google calendar with the title "brew time" (or whatever you chosen trigger word is). 
 
-The script monitors the calendar and when it sees a reminder that it's brew time, it switches the relay to turn the Goblin Teasmade on. It the code scans your chosen gmail calendar once a minute and checks "Is there a matching slot between X and X+1 minutes from now (X is a parameter in the config file). If it sees a calendar slot with the trigger word(s) (in `config.yaml`) in the title, the relay switch closes (which just mimics the teasmade alarm being activated) and the tea begins to brew. Once the the alloted time ( `closedfor` minutes in `config.yaml`) has passed, the alarm plays (we use the British National anthem).
+The script monitors the calendar and when it sees a reminder that it's brew time, it switches the relay to turn the Goblin Teasmade on. It the code scans your chosen gmail calendar once a minute and checks "Is there a matching slot between X and X+1 minutes from now (X is a parameter in the config file). If it sees a calendar slot with the trigger word(s) (in `config.yaml`) in the title, the relay switch closes (which just mimics the teasmade alarm being activated) and the water begins to boil. Once the the alloted time ( `closedfor` minutes in `config.yaml`) has passed, the alarm plays (we use the British National anthem).
 
 # Add Autostart
 
