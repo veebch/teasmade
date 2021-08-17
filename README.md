@@ -27,11 +27,6 @@ git clone https://github.com/llvllch/teasmade.git
 cd teasmade
 pip3 install -r requirements.txt
 ```
-To install the [mplayer](https://github.com/baudm/mplayer.py) module for the alarm:
-
-```
-pip install git+https://github.com/baudm/mplayer.py.git@0.7.2 
-```
 
 # Instructions
 
