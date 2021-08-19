@@ -51,7 +51,7 @@ def boil(config):
 
 	return
 
-def alarm():
+def alarm(config):
 	logging.info("Alarm Music starting")
 	brewalarm= vlc.MediaPlayer(config['alarm']['pathtotrack'])
 	brewalarm.play()
@@ -106,7 +106,7 @@ def main():
 				boil(config)
 				# if boil completed without interrupt, play the alarm
 				if heatrelay.value==1:
-					alarm()
+					alarm(config)
 					# Turn the kettle off. Teasmade should have already done this. Safety first etc
 					resetkettle()
 			else:
