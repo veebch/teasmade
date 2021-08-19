@@ -33,7 +33,7 @@ def resetkettle():
 	heatrelay.off()
 	return
 
-def boil():
+def boil(config):
 	# Turn the relay on
 	heatrelay.on()
 	# Visual Indicator of Heating
@@ -45,7 +45,7 @@ def boil():
 	heattimeseconds=int(config['relay']['closedfor'])*60
 	notify = "Power to teasmade active for "+str(config['relay']['closedfor'])+" minutes"
 	logging.info(notify)
-
+            
 	for i in tqdm(range(iterations)):
 		time.sleep(heattimeseconds/iterations)
 
@@ -103,7 +103,7 @@ def main():
 			waitforit ="No Event" in result.stdout.decode()
 			if waitforit==False:
 				logging.info("Matching appointment coming up, heating the water")
-				boil()
+				boil(config)
 				# if boil completed without interrupt, play the alarm
 				if heatrelay.value==1:
 					alarm()
