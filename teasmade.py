@@ -100,7 +100,7 @@ def main():
 			now_plus_end= now + timedelta(minutes = lookahead+1)
 			result=subprocess.run(['gcalcli','--calendar',config['calendar']['name'],'search', config['calendar']['trigger'],str(now_plus_start), str(now_plus_end)], stdout=subprocess.PIPE)
 			logging.info(result.stdout.decode())
-			waitforit ="No Event" in result.stdout.decode()
+			waitforit =not(config['calendar']['trigger'] in result.stdout.decode())
 			if waitforit==False:
 				logging.info("Matching appointment coming up, heating the water")
 				boil(config)
