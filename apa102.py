@@ -244,3 +244,5 @@ class APA102:
         """For debug purposes: Dump the LED array onto the console."""
 
         print(self.leds)
+
+
