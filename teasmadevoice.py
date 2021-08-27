@@ -140,9 +140,9 @@ pa = None
 audio_stream = None
 GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
  
-gpiopinlight = 13
+gpiopinlight = 12
 GPIO.setup(gpiopinlight, GPIO.OUT) # GPIO Assign mode
-gpiopinheat = 12
+gpiopinheat = 13
 GPIO.setup(gpiopinheat, GPIO.OUT) # GPIO Assign mode
 
 try:
