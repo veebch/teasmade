@@ -66,6 +66,8 @@ def togglerelay():
 		print("Off...Turning on")
 		heatrelay.on()
 		# Visual Indicator of Heating
+		pixels.wakeup()
+		time.sleep(1)
 		pixels.think()
 	return
 
