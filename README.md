@@ -1,5 +1,5 @@
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/BIGsW0TYSuU/0.jpg)](https://www.youtube.com/watch?v=BIGsW0TYSuU)
+[![Teasmade](https://img.youtube.com/vi/BIGsW0TYSuU/0.jpg)](https://www.youtube.com/watch?v=BIGsW0TYSuU)
 
 [![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCz5BOU9J9pB_O0B8-rDjCWQ?label=YouTube&style=social)](https://www.youtube.com/channel/UCz5BOU9J9pB_O0B8-rDjCWQ)
 
